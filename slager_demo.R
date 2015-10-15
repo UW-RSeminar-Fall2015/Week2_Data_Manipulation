@@ -24,6 +24,11 @@ as.character(birds$id) -> birds$id
 class(birds$id)
 as.numeric(birds$id) -> birds$id
 class(birds$id)
+birds$species
+as.factor(birds$species) -> f
+levels(f)
+unique(birds$species)
+
 
 ## Extract vectors/values from data frames using indices
 birds$species
@@ -34,10 +39,18 @@ birds[1,"duration"] # 2nd row
 birds[c(1,3),"duration"] # duration from 1st & 3rd rows
 4 -> birds[1,"duration"]
 
+## Other vector functions worth mentioning
+"NOWA" %in% birds$species
+birds$species %in% "NOWA" #"NOWA" is a character vector length 1
+union(1:10,5:15)
+
 ## Subsetting
 subset(birds,birds$species=="NOWA") -> a
 str(a)
 which(birds$species=="NOWA") # Vector of indices when condition true
+which(birds$species!="NOWA") # Vector of indices when condition false
+which(!birds$species=="NOWA") # Negate any logical vector with "!"
+!TRUE
 birds[which(birds$species=="NOWA"),] -> a
 str(a)
 
