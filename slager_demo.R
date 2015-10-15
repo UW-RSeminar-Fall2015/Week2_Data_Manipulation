@@ -66,6 +66,36 @@ a[[40]]
 sapply(a,function(x){length(x$species)}) -> b
 unname(b)
 
+## vapply equivalent (specifies the data structure of function return)
+vapply(a,function(x){length(x$species)},FUN.VALUE=1) -> b
+
+## lapply equivalent (returns list of same length as a)
+lapply(a,function(x){length(x$species)}) -> b
+str(b)
+b[["AMCR"]]
+unlist(b)
+
+## apply - applies function across margins of matrix or array
+matrix(1:81,9) -> m
+m
+apply(m,1,sum) #rows
+apply(m,2,sum) #columns
+rowSums(m) #Built-in equivalent (sums and means only)
+colSums(m)
+apply(m,2,function(x){      #each x is a matrix column
+  sapply(x,function(y){       #apply functions can be nested
+    if (y %% 2 == 0) {y} else {y*2}  #each y is element of column x
+  }) # end of sapply
+}) # end of apply
+
+matrix(rep_len(c(2,1),81) * 1:81 ,9)  #(but this is better)
+
+## mapply - vectorizes across multiple arguments
+mapply(rep, 1:4, 4:1)
+mapply(rep,time=1:4,x=4:1)
+
+
+
 ## another sapply example
 split(everett,everett$species) -> a
 a[[1]]
